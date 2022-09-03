@@ -1,0 +1,55 @@
+name: nightout
+description: Partying groups finder
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.5 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  appwrite: ^6.0.0
+
+  cupertino_icons: ^1.0.5
+  google_maps_flutter: ^2.1.10
+  geolocator: ^9.0.1
+  uuid: ^3.0.6
+  marker_icon: ^0.7.1
+  custom_map_markers: ^0.0.2+1
+  google_place: ^0.4.7
+  fl_chart: ^0.55.1
+  shared_preferences: ^2.0.15
+  http: ^0.13.5
+  dartz: ^0.10.1
+  mockito: ^5.3.0
+  build_runner: ^2.2.0
+  faker: ^2.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  hive_generator: ^1.1.3
+  flutter_signin_button: ^2.0.0
+  flutter_chat_ui: ^1.6.4
+  flutter_riverpod: ^1.0.4
+  xmpp_plugin: ^2.2.3
+  sliver_fab: ^1.0.0
+  flutter_expandable_fab: ^1.5.0
+  google_fonts: ^3.0.1
+  flutter_contacts: ^1.1.5
+  duration: ^3.0.11
+  fluttercontactpicker: ^4.7.0
+  collection: ^1.16.0
+  url_launcher: ^6.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.1
+
+flutter:
+
+  uses-material-design: true
