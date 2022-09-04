@@ -6,8 +6,6 @@ import 'package:nightout/place/place.dart';
 import 'package:nightout/tag/tag.dart';
 import 'package:uuid/uuid.dart';
 
-export 'widget.dart';
-
 class Party {
   String id = const Uuid().v4();
   String name;

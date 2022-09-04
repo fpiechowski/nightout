@@ -24,4 +24,12 @@ class GroupRepository {
         .toList()
         .let((it) => Future.wait(it));
   }
+
+  Future<Group> getById(String id, Ref ref) async {
+    return await databases
+        .getDocument(collectionId: groupCollectionId, documentId: id)
+        .then(
+          (it) => Group.fromDocument(it, ref),
+        );
+  }
 }

@@ -175,6 +175,7 @@ final _textButtonTheme = TextButtonThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
     ),
+    foregroundColor: _nightoutColorScheme.onSecondary,
   ),
 );
 

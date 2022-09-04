@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nightout/party/nearBy/filters/filters.dart';
-import 'package:nightout/party/nearBy/provider.dart';
+import 'package:nightout/party/near_by/filters/filters.dart';
+import 'package:nightout/party/near_by/provider.dart';
 import 'package:nightout/tag/tag.dart';
 import 'package:nightout/utils/error.dart';
 import 'package:nightout/utils/loading.dart';
@@ -65,7 +65,7 @@ class Filters extends ConsumerWidget {
                       selected: !excludedPartyTypes().contains(PartyType.place),
                       onSelected: (selected) => excludedPartyTypesNotifier
                               .state =
-                          excludedPartyTypesAfterSelection(
+                          _excludedPartyTypesAfterSelection(
                               selected, PartyType.place, excludedPartyTypes()),
                       selectedColor: Theme.of(context).primaryColor,
                     ),
@@ -75,7 +75,7 @@ class Filters extends ConsumerWidget {
                       selected: !excludedPartyTypes().contains(PartyType.group),
                       onSelected: (selected) => excludedPartyTypesNotifier
                               .state =
-                          excludedPartyTypesAfterSelection(
+                          _excludedPartyTypesAfterSelection(
                               selected, PartyType.group, excludedPartyTypes()),
                       selectedColor: Theme.of(context).primaryColor,
                     ),
@@ -94,7 +94,7 @@ class Filters extends ConsumerWidget {
                             selected: !excludedTags().contains(tag),
                             onSelected: (selected) =>
                                 excludedTagsNotifier.state =
-                                    excludedTagsAfterSelection(
+                                    _excludedTagsAfterSelection(
                                         selected, tag, excludedTags()),
                             selectedColor: Theme.of(context).primaryColor,
                           ))
@@ -110,7 +110,7 @@ class Filters extends ConsumerWidget {
     );
   }
 
-  Set<PartyType> excludedPartyTypesAfterSelection(
+  Set<PartyType> _excludedPartyTypesAfterSelection(
       bool selected, PartyType partyType, Set<PartyType> excludedPartyTypes) {
     return (selected
             ? excludedPartyTypes.difference({partyType})
@@ -118,7 +118,7 @@ class Filters extends ConsumerWidget {
         .toSet();
   }
 
-  Set<Tag> excludedTagsAfterSelection(
+  Set<Tag> _excludedTagsAfterSelection(
       bool selected, Tag tag, Set<Tag> excludedTags) {
     return (selected
             ? excludedTags.difference({tag})

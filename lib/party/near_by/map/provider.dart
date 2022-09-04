@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightout/geolocalization/geolocalization.dart';
-import 'package:nightout/party/nearBy/filters/filters.dart';
+import 'package:nightout/party/near_by/filters/filters.dart';
 
 final cameraPositionProvider = FutureProvider((ref) async {
   debugPrint("cameraPositionProvider");

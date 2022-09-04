@@ -5,3 +5,4 @@ class GroupRouteArguments {
 
   GroupRouteArguments(this.group);
 }
+

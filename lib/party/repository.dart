@@ -8,16 +8,18 @@ import 'package:nightout/appwrite/appwrite.dart';
 import 'package:nightout/party/data.dart';
 import 'package:nightout/place/google/google.dart';
 
-import '../../geolocalization/geolocalization.dart';
+import '../geolocalization/geolocalization.dart';
 
 const String partiesCollectionId = "63125488d50e148853f0";
 
-class NearByPartiesRepository {
+final partiesRepositoryProvider = Provider((ref) => PartiesRepository(ref));
+
+class PartiesRepository {
   final Ref ref;
 
-  NearByPartiesRepository(this.ref);
+  PartiesRepository(this.ref);
 
-  Future<List<Party>> getAllNearByParties({
+  Future<List<Party>> getNearByParties({
     required Position position,
     required int radius,
   }) async {
@@ -26,39 +28,20 @@ class NearByPartiesRepository {
       radius,
     );
 
-    Iterable<Party> parties = await getNearByParties(position, radius);
+    Iterable<Party> parties = await _getNearByParties(position, radius);
 
     return parties.followedBy(googlePlacesParties).toList();
   }
 
-  Future<Iterable<Party>> getNearByParties(
-      Position position, int radius) async {
-    final execution = await functions.createExecution(
-        functionId: "getNearByPartiesIDs",
-        data: jsonEncode(
-          GetNearByPartiesIDsExecutionData(
-            GetNearByPartiesIDsExecutionDataPosition(
-              position.longitude,
-              position.latitude,
-            ),
-            radius,
-          ),
-        ),
-        xasync: false);
-
-    debugPrint("getNearByPartiesIDs = ${execution.response}");
-
-    final Map<String, dynamic> idToDistanceMap = jsonDecode(execution.response);
-
+  Future<List<Party>> getPartiesByIdIn(List<String> ids) async {
     final listDocuments = await databases.listDocuments(
-      collectionId: "parties",
-      queries: idToDistanceMap.keys.map((e) => Query.equal("id", e)).toList(),
+      collectionId: partiesCollectionId,
+      queries: ids.map((e) => Query.equal("id", e)).toList(),
     );
 
-    final parties = listDocuments.documents.map(
-      (e) => Party.fromDocument(e, ref),
-    );
-    return parties;
+    return listDocuments.documents
+        .map((e) => Party.fromDocument(e, ref))
+        .toList();
   }
 
   Future<Iterable<Party>> getGooglePlacesParties(
@@ -80,6 +63,37 @@ class NearByPartiesRepository {
     );
 
     return googlePlacesParties;
+  }
+
+  Future<Iterable<Party>> _getNearByParties(
+      Position position, int radius) async {
+    Map<String, dynamic> idToDistanceMap =
+        await _getNearByPartiesIDs(position, radius);
+
+    final parties = getPartiesByIdIn(idToDistanceMap.keys.toList());
+
+    return parties;
+  }
+
+  Future<Map<String, dynamic>> _getNearByPartiesIDs(
+      Position position, int radius) async {
+    final execution = await functions.createExecution(
+        functionId: "getNearByPartiesIDs",
+        data: jsonEncode(
+          GetNearByPartiesIDsExecutionData(
+            GetNearByPartiesIDsExecutionDataPosition(
+              position.longitude,
+              position.latitude,
+            ),
+            radius,
+          ),
+        ),
+        xasync: false);
+
+    debugPrint("getNearByPartiesIDs = ${execution.response}");
+
+    final Map<String, dynamic> idToDistanceMap = jsonDecode(execution.response);
+    return idToDistanceMap;
   }
 }
 

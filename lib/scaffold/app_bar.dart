@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:nightout/utils/lorem_picsum.dart';
 
@@ -34,7 +35,7 @@ class NightOutAppBar extends StatelessWidget implements PreferredSizeWidget {
         super(key: key);
 
   static Widget _poppableLeadingBuilder(BuildContext context) => IconButton(
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => AutoRouter.of(context).pop(),
         icon: const Icon(Icons.arrow_back),
       );
 

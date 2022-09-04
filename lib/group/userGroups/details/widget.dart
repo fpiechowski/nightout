@@ -15,19 +15,17 @@ import 'package:nightout/utils/image_labeled_button.dart';
 import 'package:nightout/utils/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class UserGroupDetails extends ConsumerWidget {
+class GroupDetails extends ConsumerWidget {
   final String groupId;
 
-  const UserGroupDetails(
-    this.groupId, {
+  const GroupDetails({
     Key? key,
+    required this.groupId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final group = ref.watch(userGroupProvider(groupId));
-
-    return group.when(
+    return ref.watch(userGroupProvider(groupId)).when(
         data: (data) => Details(
               title: data.name,
               actions: [
@@ -97,9 +95,9 @@ class UserGroupDetails extends ConsumerWidget {
                   delegate: SliverChildListDelegate(
                     [
                       FavoriteTags(),
-                      /*FavoritePlaces(
+                      FavoritePlaces(
                         places: data.favoritePlaces,
-                      )*/
+                      )
                     ],
                   ),
                 )

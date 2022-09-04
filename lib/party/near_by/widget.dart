@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nightout/party/nearBy/map/map.dart';
+import 'package:nightout/party/near_by/map/map.dart';
 import 'package:nightout/scaffold/scaffold.dart';
 
 class NearByParties extends ConsumerWidget {

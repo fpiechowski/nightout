@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nightout/party/nearBy/filters/filters.dart';
+import 'package:nightout/party/near_by/filters/filters.dart';
 import 'package:nightout/tag/tag.dart';
 
 const _defaultRadius = 3000;

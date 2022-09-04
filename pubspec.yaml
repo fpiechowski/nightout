@@ -18,7 +18,6 @@ dependencies:
   google_maps_flutter: ^2.1.10
   geolocator: ^9.0.1
   uuid: ^3.0.6
-  marker_icon: ^0.7.1
   custom_map_markers: ^0.0.2+1
   google_place: ^0.4.7
   fl_chart: ^0.55.1
@@ -26,7 +25,6 @@ dependencies:
   http: ^0.13.5
   dartz: ^0.10.1
   mockito: ^5.3.0
-  build_runner: ^2.2.0
   faker: ^2.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -43,12 +41,16 @@ dependencies:
   fluttercontactpicker: ^4.7.0
   collection: ^1.16.0
   url_launcher: ^6.1.5
+  auto_route: ^5.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.1
+
+  auto_route_generator: ^5.0.1
+  build_runner: ^2.2.0
 
 flutter:
 

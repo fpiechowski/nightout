@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightout/geolocalization/geolocalization.dart';
-import 'package:nightout/party/nearBy/filters/filters.dart';
-import 'package:nightout/party/nearBy/near_by.dart';
+import 'package:nightout/party/near_by/filters/filters.dart';
 
-final nearByPartiesRepositoryProvider =
-    Provider((ref) => NearByPartiesRepository(ref));
+import '../party.dart';
 
 final filteredNearByPartiesProvider = FutureProvider((ref) async {
   final nearByParties = await ref.watch(nearByPartiesProvider.future);
@@ -22,12 +20,12 @@ final filteredNearByPartiesProvider = FutureProvider((ref) async {
 
 final nearByPartiesProvider = FutureProvider((ref) async {
   debugPrint("nearByPartiesProvider");
-  final nearByPartiesRepository = ref.read(nearByPartiesRepositoryProvider);
+  final partiesRepository = ref.read(partiesRepositoryProvider);
 
   final radius = ref.watch(radiusProvider);
   final position = await ref.watch(positionProvider.future);
 
-  final allParties = await nearByPartiesRepository.getAllNearByParties(
+  final allParties = await partiesRepository.getNearByParties(
     position: position,
     radius: radius,
   );

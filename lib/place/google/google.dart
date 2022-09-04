@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_place/google_place.dart';
-import 'package:nightout/geolocalization/geolocalization.dart';
 import 'package:http/http.dart' as http;
+import 'package:nightout/geolocalization/geolocalization.dart';
 import 'package:nightout/place/place.dart';
 
-final googlePlacesRepositoryProvider = Provider((ref) => GooglePlacesRepository());
+final googlePlacesRepositoryProvider =
+    Provider((ref) => GooglePlacesRepository());
 
 class GooglePlacesRepository {
   static const apiKey = "AIzaSyBMS-yX_sDHkpntyOwGoi5qjjetN7ByFec";
@@ -20,21 +21,15 @@ class GooglePlacesRepository {
     final nightClubs = _getNearByPlacesByType(position, radius, "night_club");
     final bars = _getNearByPlacesByType(position, radius, "bar");
     final cafes = _getNearByPlacesByType(position, radius, "cafe");
-    final casinos = _getNearByPlacesByType(position, radius, "casino");
-    final restaurants = _getNearByPlacesByType(position, radius, "restaurant");
     final searchResultsFutures = [
       nightClubs,
       bars,
       cafes,
-      casinos,
-      restaurants
     ];
     final searchResults =
         (await Future.wait(searchResultsFutures)).expand((element) => element);
 
-    return searchResults
-        .map((e) => Place.fromSearchResults(e))
-        .toList();
+    return searchResults.map((e) => Place.fromSearchResults(e)).toList();
   }
 
   Future<List<SearchResult>> _getNearByPlacesByType(
