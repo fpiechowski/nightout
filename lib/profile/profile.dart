@@ -24,4 +24,6 @@ class Profile {
       favoritePlaces: favoritePlaces,
     );
   }
+
+  static from(User user) {}
 }

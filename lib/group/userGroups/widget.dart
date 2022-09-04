@@ -1,14 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:nightout/contacts/provider.dart';
 import 'package:nightout/group/group.dart';
 import 'package:nightout/group/userGroups/user_groups.dart';
+import 'package:nightout/profile/profile.dart';
+import 'package:nightout/profile/provider.dart';
 import 'package:nightout/router.gr.dart' as router;
 import 'package:nightout/scaffold/scaffold.dart';
+import 'package:nightout/sign_in/sign_in.dart';
 import 'package:nightout/utils/error.dart';
 import 'package:nightout/utils/glowing_fab.dart';
 import 'package:nightout/utils/loading.dart';
+import 'package:uuid/uuid.dart';
 
 class UserGroups extends ConsumerWidget {
   final String userId;
@@ -23,7 +30,7 @@ class UserGroups extends ConsumerWidget {
     return NightOutScaffold.poppable(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: GlowingFloatingActionButton(
-        onPressed: () {},
+        onPressed: () => createGroup(ref),
         child: const Icon(Icons.add),
       ),
       body: ref.watch(userGroupsProvider).when(
@@ -76,6 +83,16 @@ class UserGroups extends ConsumerWidget {
               ),
           loading: () => const Center(child: Loading())),
     );
+  }
+
+  createGroup(WidgetRef ref) async {
+    final phoneContact = await FlutterContactPicker.pickPhoneContact();
+
+    if (phoneContact.phoneNumber?.number != null) {
+
+    } else {
+      throw "contact with no phone number";
+    }
   }
 }
 

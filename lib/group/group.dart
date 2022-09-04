@@ -22,8 +22,6 @@ class Group with Comparable<Group> {
 
   final Profile leader;
 
-  final LatLng position;
-
   final GroupStatus groupStatus;
 
   final DateTime lastActivity;
@@ -32,7 +30,6 @@ class Group with Comparable<Group> {
 
   Group({
     required this.id,
-    required this.position,
     required this.leader,
     required this.members,
     required this.groupStatus,
