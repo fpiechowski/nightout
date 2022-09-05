@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM python
 
 WORKDIR ~/nightout/
 
