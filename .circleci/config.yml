@@ -25,7 +25,6 @@ jobs:
           name: Build Web
           working_directory: ~/nightout
           command: flutter build web --web-renderer=canvaskit
-      - docker/install-docker
       - docker/build:
           image: nightout/nightout
       - docker/push:
