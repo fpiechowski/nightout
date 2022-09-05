@@ -26,6 +26,17 @@ jobs:
           name: Build Web
           working_directory: ~/nightout
           command: flutter build web --web-renderer=canvaskit --web-port=8080
+      - run:
+          name: Build Docker Image
+          working_directory: ~/nightout
+          command:
+            - docker/build:
+                image: nightout/nightout
+      - run:
+          name: Publish Docker Image
+          command:
+            - docker/push:
+                image: nightout/nightout
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -33,6 +44,3 @@ workflows:
   web:
     jobs:
       - build
-      - docker/publish:
-          image: nightout/nightout
-          update-description: true
