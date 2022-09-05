@@ -34,5 +34,5 @@ workflows:
     jobs:
       - build
       - docker/publish
-        image: nightout/nightout
-        update-description: true
+          image: nightout/nightout
+          update-description: true
