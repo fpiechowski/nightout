@@ -33,6 +33,6 @@ workflows:
   web:
     jobs:
       - build
-      - docker/publish
+      - docker/publish:
           image: nightout/nightout
           update-description: true
