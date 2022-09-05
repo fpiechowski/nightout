@@ -1,7 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nightout/appwrite/appwrite.dart';
-import 'package:nightout/profile/profile.dart';
+import 'package:nightout/profile/data.dart';
 
 const profilesCollectionId = "6304f0f90cdcfa4a3eb5";
 

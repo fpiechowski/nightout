@@ -4,7 +4,7 @@ import 'package:nightout/group/group.dart';
 import 'package:nightout/group/userGroups/provider.dart';
 import 'package:nightout/group/userGroups/user_groups.dart';
 
-final groupProvider = FutureProvider.family<Group, String>((ref, id) {
+final groupByIdProvider = FutureProvider.family<Group, String>((ref, id) {
   return ref.watch(groupRepositoryProvider).getById(id, ref);
 });
 

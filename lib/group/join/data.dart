@@ -1,4 +1,6 @@
 import 'package:appwrite/models.dart';
+import 'package:nightout/group/group.dart';
+import 'package:nightout/profile/data.dart';
 
 class GroupInvitation {
   final String id;
@@ -14,4 +16,12 @@ class GroupInvitation {
       groupId: e.data["groupId"] as String,
     );
   }
+}
+
+class JoinGroupAggregate {
+  final GroupInvitation invitation;
+  final Profile profile;
+  final Group group;
+
+  JoinGroupAggregate(this.invitation, this.profile, this.group);
 }

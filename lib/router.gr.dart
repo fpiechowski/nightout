@@ -56,14 +56,14 @@ class AppRouter extends _i8.RootStackRouter {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<JoinGroupArgs>(
           orElse: () => JoinGroupArgs(
-              groupId: pathParams.getString('groupId'),
-              phoneNumber: pathParams.getString('phoneNumber')));
+                invitationId: pathParams.getString('invitationId'),
+              ));
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i5.JoinGroup(
-              key: args.key,
-              groupId: args.groupId,
-              phoneNumber: args.phoneNumber));
+            key: args.key,
+            invitationId: args.invitationId,
+          ));
     },
     PlaceDetails.name: (routeData) {
       final args = routeData.argsAs<PlaceDetailsArgs>();
@@ -179,30 +179,32 @@ class GroupDetailsArgs {
 /// generated route for
 /// [_i5.JoinGroup]
 class JoinGroup extends _i8.PageRouteInfo<JoinGroupArgs> {
-  JoinGroup(
-      {_i9.Key? key, required String groupId, required String phoneNumber})
-      : super(JoinGroup.name,
-            path: '/groups/:groupId/join/:phoneNumber',
-            args: JoinGroupArgs(
-                key: key, groupId: groupId, phoneNumber: phoneNumber),
-            rawPathParams: {'groupId': groupId, 'phoneNumber': phoneNumber});
+  JoinGroup({
+    _i9.Key? key,
+    required String invitationId,
+  }) : super(JoinGroup.name,
+            path: '/group_invitations/:invitationId',
+            args: JoinGroupArgs(key: key, invitationId: invitationId),
+            rawPathParams: {
+              'invitationId': invitationId,
+            });
 
   static const String name = 'JoinGroup';
 }
 
 class JoinGroupArgs {
-  const JoinGroupArgs(
-      {this.key, required this.groupId, required this.phoneNumber});
+  const JoinGroupArgs({
+    this.key,
+    required this.invitationId,
+  });
 
   final _i9.Key? key;
 
-  final String groupId;
-
-  final String phoneNumber;
+  final String invitationId;
 
   @override
   String toString() {
-    return 'JoinGroupArgs{key: $key, groupId: $groupId, phoneNumber: $phoneNumber}';
+    return 'JoinGroupArgs{key: $key, invitationId: $invitationId}';
   }
 }
 

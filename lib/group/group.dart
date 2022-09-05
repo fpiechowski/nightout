@@ -1,14 +1,12 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nightout/group/group_status.dart';
 import 'package:nightout/place/place.dart';
-import 'package:nightout/profile/provider.dart';
-import 'package:nightout/utils/lat_lng.dart';
+import 'package:nightout/profile/data.dart';
+import 'package:nightout/tag/tag.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../profile/profile.dart';
-import '../tag/tag.dart';
+import '../profile/profile.dart';
 
 export 'group_status.dart';
 export 'route.dart';
@@ -56,14 +54,12 @@ class Group with Comparable<Group> {
       "members": members.map((e) => e.id),
       "groupStatus": groupStatus.id,
       "lastActivity": lastActivity.millisecondsSinceEpoch,
-      "position": position.toString(),
     };
   }
 
   static Future<Group> fromDocument(Document e, Ref ref) async {
     return Group(
       id: e.$id,
-      position: parseLatLng(e.data["position"] as String),
       leader: Profile(
           id: const Uuid().v4(),
           phoneNumber: "",

@@ -13,7 +13,6 @@ final userGroupProvider = FutureProvider.family<Group, String>((ref, id) async {
 
   return Group(
     id: document.$id,
-    position: parseLatLng(document.data["position"]),
     leader: await ref
         .watch(profileByIdProvider(document.data["leader"] as String).future),
     members: await ref.watch(profileByIdInProvider(

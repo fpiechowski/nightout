@@ -8,14 +8,35 @@ import 'package:nightout/profile/provider.dart';
 final groupInvitationRepositoryProvider =
     Provider((ref) => GroupInvitationRepository(ref));
 
-final groupInvitationsProvider =
+final joinGroupAggregateByInvitationIdProvider =
+    FutureProvider.family<JoinGroupAggregate, String>(
+        (ref, invitationId) async {
+  final invitation =
+      await ref.watch(groupInvitationByIdProvider(invitationId).future);
+  final profile = await ref
+      .watch(profileByPhoneNumberProvider(invitation.phoneNumber).future);
+  final group = await ref.watch(groupByIdProvider(invitation.groupId).future);
+
+  return JoinGroupAggregate(invitation, profile, group);
+});
+
+final groupInvitationByIdProvider =
+    FutureProvider.family<GroupInvitation, String>(
+  (ref, id) => databases
+      .getDocument(collectionId: groupInvitationsCollectionId, documentId: id)
+      .then(
+        (document) => GroupInvitation.fromDocument(document),
+      ),
+);
+
+final groupInvitationsByGroupIdProvider =
     FutureProvider.family<List<GroupInvitation>, String>((ref, id) {
   return ref.watch(groupInvitationRepositoryProvider).getByGroupId(id);
 });
 
 final acceptGroupInvitation =
     Provider.family<void, GroupInvitation>((ref, invitation) async {
-  final group = await ref.read(groupProvider(invitation.groupId).future);
+  final group = await ref.read(groupByIdProvider(invitation.groupId).future);
   final profile = await ref
       .read(profileByPhoneNumberProvider(invitation.phoneNumber).future);
 

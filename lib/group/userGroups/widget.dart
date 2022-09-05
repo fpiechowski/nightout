@@ -7,7 +7,7 @@ import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:nightout/contacts/provider.dart';
 import 'package:nightout/group/group.dart';
 import 'package:nightout/group/userGroups/user_groups.dart';
-import 'package:nightout/profile/profile.dart';
+import 'package:nightout/profile/data.dart';
 import 'package:nightout/profile/provider.dart';
 import 'package:nightout/router.gr.dart' as router;
 import 'package:nightout/scaffold/scaffold.dart';

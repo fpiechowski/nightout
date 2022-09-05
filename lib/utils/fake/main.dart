@@ -3,7 +3,7 @@ import 'package:nightout/appwrite/appwrite.dart';
 import 'package:nightout/geolocalization/geolocalization.dart';
 import 'package:nightout/group/group.dart';
 import 'package:nightout/tag/tag.dart';
-import 'package:nightout/profile/profile.dart';
+import 'package:nightout/profile/data.dart';
 import 'package:uuid/uuid.dart';
 
 void createFakeGroups() {
@@ -21,7 +21,6 @@ List<Group> generateGroups() {
     random.integer(15, min: 3),
     (index) => Group(
       id: faker.guid.toString(),
-      position: const LatLng(0, 0),
       leader: Profile(
         id: faker.guid.guid(),
         firstName: faker.person.firstName(),
