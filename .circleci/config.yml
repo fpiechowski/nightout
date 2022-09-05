@@ -28,6 +28,7 @@ jobs:
       - docker/check
       - docker/build:
           image: mesayah/nightout
+          tag: latest,$CIRCLE_BUILD_NUM
       - docker/push:
           image: mesayah/nightout
           tag: latest,$CIRCLE_BUILD_NUM
