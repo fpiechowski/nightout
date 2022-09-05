@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  flutter: circleci/flutter@1.1.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -15,19 +18,10 @@ jobs:
     working_directory: ~/nightout
 
     steps:
-      - run:
-          name: Install Flutter
-          working_directory: ~/flutter
-          command: |
-            git clone https://github.com/flutter/flutter.git
-            export PATH="$PATH:`pwd`/flutter/bin"
-      - run:
-          name: Flutter Doctor
-          working_directory: ~/
-          command: flutter doctor
       - checkout
+      - flutter/install_sdk_and_pub
       - run:
-          name: Build
+          name: Build Web
           working_directory: ~/nightout
           command: flutter build web
 
