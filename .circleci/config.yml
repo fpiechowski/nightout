@@ -30,8 +30,8 @@ jobs:
           name: Build Docker Image
           working_directory: ~/nightout
           command:
-            - docker/build:
-                image: nightout/nightout
+            docker/build:
+              image: nightout/nightout
       - run:
           name: Publish Docker Image
           command:
