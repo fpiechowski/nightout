@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Build Web
           working_directory: ~/nightout
-          command: flutter build web --web-renderer=canvaskit --web-port=8080
+          command: flutter build web --web-renderer=canvaskit
       - run:
           name: Build Docker Image
           working_directory: ~/nightout
