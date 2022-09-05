@@ -30,6 +30,7 @@ jobs:
           image: mesayah/nightout
       - docker/push:
           image: mesayah/nightout
+          tag: latest,$CIRCLE_BUILD_NUM
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
