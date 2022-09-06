@@ -34,10 +34,21 @@ jobs:
             - build
             - Dockerfile
 
+parameters:
+  image-tag: 
+    type: string
+    default: ${CIRCLE_SHA1}
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  web:
+  web-deploy:
+    jobs:
+      - aws-ecs/deploy-service-update:
+          cluster: nightout
+          family: web
+          container-image-name-updates: container=web,tag=<< pipeline.parameters.image-tag >>
+  web-build-and-deploy:
     jobs:
       - build
       - aws-ecr/build-and-push-image:
@@ -51,4 +62,4 @@ workflows:
             - aws-ecr/build-and-push-image
           cluster: nightout
           family: web
-          container-image-name-updates: 'container=web,tag=${CIRCLE_SHA1}'
+          container-image-name-updates: container=web,tag=<< pipeline.parameters.image-tag >>
