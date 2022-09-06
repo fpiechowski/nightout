@@ -38,12 +38,28 @@ parameters:
   image-tag: 
     type: string
     default: ${CIRCLE_SHA1}
+  web-build-and-deploy: 
+    type: boolean
+    default: true
+  web-deploy: 
+    type: boolean
+    default: false
+  
   
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
+  web-deploy:
+    when: << pipeline.parameters.web-deploy >>
+    jobs:
+      - aws-ecs/deploy-service-update:
+          cluster: nightout
+          family: web
+          container-image-name-updates: container=web,tag=<< pipeline.parameters.image-tag >>
+
   web-build-and-deploy:
+    when: << pipeline.parameters.web-build-and-deploy >>
     jobs:
       - build
       - aws-ecr/build-and-push-image:
