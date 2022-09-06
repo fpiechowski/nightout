@@ -40,8 +40,12 @@ workflows:
     jobs:
       - build
       - aws-ecr/build-and-push-image:
+          requires: 
+            - build
           repo: nightout
           attach-workspace: true
       - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
           cluster: nightout
           family: web
