@@ -28,6 +28,10 @@ jobs:
           name: Build Web
           working_directory: ~/nightout
           command: flutter build web --web-renderer=canvaskit
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -37,6 +41,7 @@ workflows:
       - build
       - aws-ecr/build-and-push-image:
           repo: nightout
+          attach-workspace: true
       - aws-ecs/deploy-service-update:
           cluster: nightout
           family: web
