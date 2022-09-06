@@ -51,4 +51,4 @@ workflows:
             - aws-ecr/build-and-push-image
           cluster: nightout
           family: web
-          container-image-name-updates: 'container=nightout-web,tag=${CIRCLE_SHA1}'
+          container-image-name-updates: 'container=web,tag=${CIRCLE_SHA1}'
