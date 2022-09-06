@@ -44,6 +44,7 @@ workflows:
           requires: 
             - build
           repo: nightout
+          tag: '${CIRCLE_SHA1}'
           attach-workspace: true
       - aws-ecs/deploy-service-update:
           requires:
