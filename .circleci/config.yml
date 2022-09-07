@@ -44,6 +44,9 @@ parameters:
   web-deploy: 
     type: boolean
     default: false
+  web-build-and-publish: 
+    type: boolean
+    default: false
   
   
 
@@ -58,6 +61,17 @@ workflows:
           family: web
           container-image-name-updates: container=web,tag=<< pipeline.parameters.image-tag >>
 
+  web-build-and-publish:
+    when: << pipeline.parameters.web-build-and-publish >>
+    jobs:
+      - build
+      - aws-ecr/build-and-push-image:
+          requires:
+            - build
+          repo: nightout-web
+          tag: 'latest,${CIRCLE_SHA1}'
+          attach-workspace: true
+
   web-build-and-deploy:
     when: << pipeline.parameters.web-build-and-deploy >>
     jobs:
@@ -65,8 +79,8 @@ workflows:
       - aws-ecr/build-and-push-image:
           requires: 
             - build
-          repo: nightout
-          tag: '${CIRCLE_SHA1}'
+          repo: nightout-web
+          tag: 'latest,${CIRCLE_SHA1}'
           attach-workspace: true
       - aws-ecs/deploy-service-update:
           requires:
