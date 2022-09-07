@@ -55,7 +55,7 @@ workflows:
     jobs:
       - aws-ecs/deploy-service-update:
           cluster: nightout
-          family: nightout-web
+          family: web
           container-image-name-updates: container=web,tag=<< pipeline.parameters.image-tag >>
 
   web-build-and-deploy:
