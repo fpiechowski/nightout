@@ -86,5 +86,5 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           cluster: nightout
-          family: web
-          container-image-name-updates: container=web,tag=<< pipeline.parameters.image-tag >>
+          family: nightout-web
+          container-image-name-updates: container=nightout-web,tag=<< pipeline.parameters.image-tag >>
